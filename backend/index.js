@@ -113,11 +113,11 @@ app.post('/api/connections', async (req, res) => {
         // Note: The connection is saved to DB, but subscription failed.
         // Depending on desired behavior, you might want to "undo" the save or mark it as inactive.
         // For now, we'll just log the error and return success as the resource was created.
-        return res.status(500).json({
-          success: false,
+        return res.status(500).json({ 
+          success: false, 
           message: 'Connection saved, but failed to subscribe to MQTT topic.',
           error: err.message,
-          connection: savedConnection
+          connection: savedConnection 
         });
       }
       console.log(`Subscribed to ${savedConnection.mqttTopic} after POST`);
@@ -183,11 +183,11 @@ app.delete('/api/connections/:id', async (req, res) => {
       if (err) {
         console.error(`Error unsubscribing from ${mqttTopic} after DELETE:`, err);
         // The resource was deleted from DB. We'll still return success, but log the unsubscribe error.
-        return res.json({
-          success: true,
-          message: 'Connection deleted successfully, but failed to unsubscribe from MQTT topic.',
+        return res.json({ 
+          success: true, 
+          message: 'Connection deleted successfully, but failed to unsubscribe from MQTT topic.', 
           error: err.message,
-          deletedConnection
+          deletedConnection 
         });
       }
       console.log(`Unsubscribed from ${mqttTopic} after DELETE`);
